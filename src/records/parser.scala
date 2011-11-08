@@ -19,6 +19,7 @@ object StatementParser extends JavaTokenParsers {
   | ident ^^ { case s => Variable(s) }
   | "(" ~> expr <~ ")" ^^ { case e => e }
 //  | "struct" ~> ident ~ "{" ~ ident ~ rep("," ~ ident) <~ "}" ^^ { case c ~ _ ~ f1 ~ fs  => Clazz(c, f1, fs) }
+//  | "new" ~> ident ^^ { case c => New(c) }
   )
   def statement: Parser[Statement] = (
     ident ~ "=" ~ expr ^^ { case s ~ _ ~ r => Assignment(Variable(s), r) }
