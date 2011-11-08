@@ -28,17 +28,4 @@ object StatementParser extends JavaTokenParsers {
     vardecl
   | typedecl
   )
-  def statement: Parser[Statement] = (
-    assignment
-  | whileloop
-  | sequence
-  | expression
-  )
-  def expression: Parser[Statement] = (
-    arithexpr
-  | selection
-  | newexpr
-  )
-  def sequence: Parser[Statement] = (
-    "{"~statement~rep(","~statement)~"}"
 }
