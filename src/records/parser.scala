@@ -24,8 +24,4 @@ object StatementParser extends JavaTokenParsers {
   | "while" ~ "(" ~> expr ~ ")" ~ statement ^^ { case g ~ _ ~ b => While(g, b) }
   | "{" ~> repsep(statement, ",") <~ "}" ^^ { case ss => Sequence(ss: _*) }
   )
-  def declaration: Parser[Statement] = (
-    vardecl
-  | typedecl
-  )
 }
