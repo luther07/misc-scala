@@ -18,7 +18,7 @@ object StatementParser extends JavaTokenParsers {
     wholeNumber ^^ { case s => Constant(s.toInt) }
   | ident ^^ { case s => Variable(s) }
   | "(" ~> expr <~ ")" ^^ { case e => e }
-//  | "new" ~> ident ^^ { case c => New(c) }
+  | "new" ~> ident ^^ { case c => New(Clazz(c)) }
   )
   def statement: Parser[Statement] = (
     ident ~ "=" ~ expr ^^ { case s ~ _ ~ r => Assignment(Variable(s), r) }
