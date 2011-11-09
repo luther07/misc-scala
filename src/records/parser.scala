@@ -25,7 +25,6 @@ object StatementParser extends JavaTokenParsers {
   | "while" ~ "(" ~> expr ~ ")" ~ statement ^^ { case g ~ _ ~ b => While(g, b) }
   | "{" ~> repsep(statement, ",") <~ "}" ^^ { case ss => Sequence(ss: _*) }
   )
-//  Clazz does need it's own production, still working on producing the correct type for the second arg to Clazz
   def struct: Parser[Clazz] = (
     "struct" ~ ident ~ "{" ~ repsep(ident, ",") ~ "}" ^^ { case _ ~ c ~ _ ~ l ~ _ => Clazz((c :: l.toList).toArray : _*) }  
   )
