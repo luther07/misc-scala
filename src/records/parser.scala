@@ -18,8 +18,6 @@ object StatementParser extends JavaTokenParsers {
     wholeNumber ^^ { case s => Constant(s.toInt) }
   | ident ^^ { case s => Variable(s) }
   | "(" ~> expr <~ ")" ^^ { case e => e }
-//  the struct grammar below needs a String l for the Clazz constructor, but it finds List[String], which is what repsep produces
-//  | "struct" ~ ident ~ "{" ~ repsep(ident, ",") ~ "}" ^^ { case _ ~ c ~ _ ~ l ~ _ => Clazz(c, l) }
 //  | "new" ~> ident ^^ { case c => New(c) }
   )
   def statement: Parser[Statement] = (
@@ -27,5 +25,8 @@ object StatementParser extends JavaTokenParsers {
   | "while" ~ "(" ~> expr ~ ")" ~ statement ^^ { case g ~ _ ~ b => While(g, b) }
   | "{" ~> repsep(statement, ",") <~ "}" ^^ { case ss => Sequence(ss: _*) }
   )
-  
+//  Clazz does need it's own production, still working on producing the correct type for the second arg to Clazz
+//  def struct: Parser[Clazz] = (
+//    "struct" ~ ident ~ "{" ~ repsep(ident, ",") ~ "}" ^^ { case _ ~ c ~ _ ~ l ~ _ => Clazz(c, l: _*) }  
+//  )
 }
