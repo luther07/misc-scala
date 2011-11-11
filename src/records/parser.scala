@@ -16,7 +16,7 @@ object StatementParser extends JavaTokenParsers {
   )
   def factor: Parser[Statement] = (
     wholeNumber ^^ { case s => Constant(s.toInt) }
-  | ident ^^ { case s => Variable(s) }
+  | "var" ~ ident ^^ { case _ ~ s => Variable(s) }
   | "(" ~> expr <~ ")" ^^ { case e => e }
   )
   def statement: Parser[Statement] = (
