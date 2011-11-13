@@ -2,7 +2,7 @@ package records
 
 import scala.util.parsing.combinator._
 
-object StatementParser extends JavaTokenParsers {
+class StatementParser extends JavaTokenParsers {
   def expr: Parser[Statement] = (
     term ~ "+" ~ term ^^ { case l ~ _ ~ r => Plus(l, r) }
   | term ~ "-" ~ term ^^ { case l ~ _ ~ r => Minus(l, r) }
