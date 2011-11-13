@@ -8,6 +8,7 @@ class StatementParser extends JavaTokenParsers {
   | term ~ "-" ~ term ^^ { case l ~ _ ~ r => Minus(l, r) }
   | term
   | factor
+  | statement
   )
   def term: Parser[Statement] = (
     factor ~ "*" ~ factor ^^ { case l ~ _ ~ r => Times(l, r) }
@@ -16,11 +17,11 @@ class StatementParser extends JavaTokenParsers {
   )
   def factor: Parser[Statement] = (
     wholeNumber ^^ { case s => Constant(s.toInt) }
-  | "var" ~ ident ^^ { case _ ~ s => Variable(s) }
+  | "var" ~ ident <~ ";" ^^ { case _ ~ s => Variable(s) }
   | "(" ~> expr <~ ")" ^^ { case e => e }
   )
   def statement: Parser[Statement] = (
-    ident ~ "=" ~ expr ^^ { case s ~ _ ~ r => Assignment(Variable(s), r) }
+    ident ~ "=" ~ expr <~ ";" ^^ { case s ~ _ ~ r => Assignment(Variable(s), r) }
   | "while" ~ "(" ~> expr ~ ")" ~ statement ^^ { case g ~ _ ~ b => While(g, b) }
   | "{" ~> repsep(statement, ",") <~ "}" ^^ { case ss => Sequence(ss: _*) }
   | "new" ~> ident ^^ { case c => New(Clazz(c))}
