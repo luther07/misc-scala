@@ -5,8 +5,9 @@ object replIO {
     var x : String = "";
     while(true){
       println("Please Enter a command. Type 'help;' for more information")
-      x  = readLine() match {
-        
+      x  = readLine() 
+      
+      x match {
         case repl.help => {
           println("Interpreter help. You must type a command for an action to occur, followed by a semicolon (;)");
           println("help; brings up this screen. quit; terminates the program.");
@@ -18,7 +19,7 @@ object replIO {
         case _ => {
           interpret(x)
         }
-      }
+      } // x match
     }
     return x;
   }
