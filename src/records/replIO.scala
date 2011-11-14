@@ -1,7 +1,7 @@
 package records
 
 object replIO {
-  def myRepl() : String = {
+  def myRepl() = {
     var x : String = "";
     while(true){
       println("Please Enter a command. Type 'help;' for more information")
@@ -21,7 +21,6 @@ object replIO {
         }
       } // x match
     }
-    return x;
   }
   
   def interpret(line : String) {
