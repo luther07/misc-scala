@@ -10,6 +10,10 @@ import java.io.FileReader
 object CParse extends StatementParser {
   def main(args: Array[String]) {
     val reader = new FileReader(args(0))
-    println(parseAll(expr, reader))
+    val data = parseAll(expr, reader).get
+    if (records.Validator.validate(data))
+      println(data)
+    else
+      println("invalid")
   }
 }
