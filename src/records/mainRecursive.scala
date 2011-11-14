@@ -52,6 +52,7 @@ object mainRecursive {
     )
 
   def main(args: Array[String]) {
+    println(s)
     println(store)
     Execute(store)(s)
     println(store)
