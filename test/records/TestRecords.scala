@@ -152,8 +152,16 @@ class TestRecords extends FunSuite{
   }
   
   test("Online case 1"){
-    
+    var store = Map[String, Cell](
+    )
+    val s1 = "x = 5;";
+    replIO.interpret(s1);
+    val s2 = "var x;";
+    replIO.interpret(s2);
+    val s3 = "n = new ListNode;";
+    replIO.interpret(s3);
   }
+  
   
   test("Online case 2"){
     
