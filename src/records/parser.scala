@@ -27,6 +27,7 @@ class StatementParser extends JavaTokenParsers {
   )
   def statement: Parser[Statement] = (
     ident ~ "=" ~ expr <~ ";" ^^ { case s ~ _ ~ r => Assignment(Variable(s), r) }
+  | ident ~ "=" ~ ident <~ ";" ^^ { case s ~ _ ~ r => Assignment(Variable(s), Variable(r)) }
   | ident ~ "." ~ ident ~ "=" ~ expr <~ ";" ^^ { case rec ~ _ ~ field ~ _ ~ v => Assignment(Selection(Variable(rec), field), v) }
   | "while" ~ "(" ~> expr ~ ")" ~ statement ^^ { case g ~ _ ~ b => While(g, b) }
   | "{" ~> rep(statement) <~ "}" ^^ { case ss => Sequence(ss: _*) }
