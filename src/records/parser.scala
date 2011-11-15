@@ -35,6 +35,6 @@ class StatementParser extends JavaTokenParsers {
     "var" ~ ident <~ ";" ^^ { case _ ~ s => Variable(s) }
   )
   def struct: Parser[Clazz] = (
-    "struct" ~ ident ~ "{" ~ repsep(ident, ",") ~ "}" ^^ { case _ ~ c ~ _ ~ l ~ _ => Clazz((c :: l.toList).toArray : _*) }  
+    "struct" ~ ident ~ "{" ~ repsep(ident, ",") ~ "}" <~ ";" ^^ { case _ ~ c ~ _ ~ l ~ _ => Clazz((c :: l.toList).toArray : _*) }  
   )
 }
