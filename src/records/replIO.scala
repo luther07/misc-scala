@@ -8,10 +8,15 @@ object replIO extends StatementParser {
       println("Please Enter a command. Type 'help;' for more information")
       x  = readLine() 
       val y = x.substring(x.length()-1, x.length())
-      println(y)
       if(y != ";"){
         println("")
       }
+      
+      else if(x.length() >= 6){
+        val z = x.substring(0,6)
+        println(z)
+      }
+        
       else{
         x match {
         case repl.help => {
@@ -51,6 +56,18 @@ object replIO extends StatementParser {
     else{
       println("invalid")
     }
+  }
+  
+  def interpretStruct(line : String) {
+    val data = parseAll(struct, line)
+    if(records.Validator.validate(data).get){
+      val variable = line.substring(0, 1)
+        val mapItem = mutable.Map(variable -> Cell(0))
+        store = store ++ mapItem
+    }
+     Execute(store)(data)
+     println(data)
+    
   }
   
   def main(args: Array[String]) {
