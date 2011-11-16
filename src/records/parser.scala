@@ -9,7 +9,6 @@ class StatementParser extends JavaTokenParsers {
   | term
   | factor
   | statement
-  | declaration
   | expression
   )
   def term: Parser[Statement] = (
@@ -32,9 +31,6 @@ class StatementParser extends JavaTokenParsers {
   | ident ~ "=" ~ ident <~ ";" ^^ { case s ~ _ ~ r => Assignment(Variable(s), Variable(r)) }
   | ident ~ "." ~ ident ~ "=" ~ expr <~ ";" ^^ { case rec ~ _ ~ field ~ _ ~ v => Assignment(Selection(Variable(rec), field), v) }
   | "while" ~ "(" ~> expr ~ ")" ~ statement ^^ { case g ~ _ ~ b => While(g, b) }
-  )
-  def declaration: Parser[Statement] = (
-    "var" ~ ident <~ ";" ^^ { case _ ~ s => Variable(s) }
   )
   def struct: Parser[Clazz] = (
     "struct" ~ ident ~ "{" ~ repsep(ident, ",") ~ "}" <~ ";" ^^ { case _ ~ c ~ _ ~ l ~ _ => Clazz((c :: l.toList).toArray : _*) }  
