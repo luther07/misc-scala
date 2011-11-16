@@ -15,6 +15,7 @@ object replIO extends StatementParser {
       else if(x.length() >= 6){
         val z = x.substring(0,6)
         println(z)
+        interpretStruct(z)
       }
         
       else{
@@ -59,14 +60,15 @@ object replIO extends StatementParser {
   }
   
   def interpretStruct(line : String) {
-    val data = parseAll(struct, line)
-    if(records.Validator.validate(data).get){
-      val variable = line.substring(0, 1)
-        val mapItem = mutable.Map(variable -> Cell(0))
-        store = store ++ mapItem
-    }
-     Execute(store)(data)
-     println(data)
+    val data = parseAll(struct, line).get
+    println(data)
+//    if(records.Validator.validate(data)){
+//      val variable = line.substring(0, 1)
+//        val mapItem = mutable.Map(variable -> Cell(0))
+//        store = store ++ mapItem
+//    }
+//     Execute(store)(data)
+//     println(data)
     
   }
   
