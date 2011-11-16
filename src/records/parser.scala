@@ -19,7 +19,6 @@ class StatementParser extends JavaTokenParsers {
   )
   def factor: Parser[Statement] = (
     wholeNumber ^^ { case s => Constant(s.toInt) }
-  | "(" ~> expr <~ ")" ^^ { case e => e }
   )
   def expression: Parser[Statement] = (
     "new" ~> ident ^^ { case c => New(Clazz(c)) }
