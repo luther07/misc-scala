@@ -1,3 +1,6 @@
+/*George Vasels, Mark Johnson
+ * Project 2a.*/
+
 package records
 
 import scala.collection.mutable
@@ -12,8 +15,8 @@ object replIO extends StatementParser {
         println("")
       }
       
-      else if(x.length() >= 6){
-        val z = x.substring(0,6)
+      else if(x.length() >= 6 && (x.substring(0,6).toLowerCase() == "struct")){
+        var z = x.substring(0,6).toLowerCase();
         println(z)
         interpretStruct(z)
       }
@@ -60,7 +63,7 @@ object replIO extends StatementParser {
   }
   
   def interpretStruct(line : String) {
-    val data = parseAll(struct, line).get
+    val data = parseAll(struct, line)
     println(data)
 //    if(records.Validator.validate(data)){
 //      val variable = line.substring(0, 1)

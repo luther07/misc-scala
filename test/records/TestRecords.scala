@@ -162,18 +162,6 @@ class TestRecords extends FunSuite{
     replIO.interpret(s3);
   }
   
-  
-  test("Online case 2"){
-    
-  }
-  
-  test("Online case 3"){
-    
-  }
-  
-  test("Online case 4"){
-    
-  }
 
 
 
