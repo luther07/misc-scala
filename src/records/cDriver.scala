@@ -7,6 +7,12 @@ import java.io.FileReader
    Printing the result of parsing a file is useful only for 
    debugging. */ 
 
+/* This program can quickly and easily test the parser/lexer against a source file.
+   I use sbt's 'run' command and a filename argument, then choose the corresponding
+   class containing a main method, from the provided menu. 
+   For example, from sbt's prompt type 'run testfile.txt', then choose 'records.CParse' when
+   asked which main class you want to run. */
+
 object CParse extends StatementParser {
   def main(args: Array[String]) {
     val reader = new FileReader(args(0))
