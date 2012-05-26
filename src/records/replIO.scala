@@ -1,6 +1,3 @@
-/*George Vasels, Mark Johnson
- * Project 2a.*/
-
 package records
 
 import scala.collection.mutable
