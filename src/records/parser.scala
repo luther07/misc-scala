@@ -30,7 +30,7 @@ class StatementParser extends JavaTokenParsers {
     ident ~ "=" ~ expr <~ ";" ^^ { case s ~ _ ~ r => Assignment(Variable(s), r) }
   | ident ~ "=" ~ ident <~ ";" ^^ { case s ~ _ ~ r => Assignment(Variable(s), Variable(r)) }
   | ident ~ "." ~ ident ~ "=" ~ expr <~ ";" ^^ { case rec ~ _ ~ field ~ _ ~ v => Assignment(Selection(Variable(rec), field), v) }
-  | "while" ~ "(" ~> expr ~ ")" ~ statement ^^ { case g ~ _ ~ b => While(g, b) }
+  | "while" ~ "(" ~ expr ~ ")" ~ "{" ~ statement ~ "}" ~ ";" ^^ { case _ ~ _ ~ g ~ _ ~ _ ~ b ~ _ ~ _ => While(g, b) }
   )
   def struct: Parser[Clazz] = (
     "struct" ~ ident ~ "{" ~ repsep(ident, ",") ~ "}" <~ ";" ^^ { case _ ~ c ~ _ ~ l ~ _ => Clazz((c :: l.toList).toArray : _*) }  
